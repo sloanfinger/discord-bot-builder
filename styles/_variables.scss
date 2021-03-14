@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;800&display=swap');
+
+$light: #36393f;
+$dark: #2f3136;
+$black: #202225;
+
+$orange: #f26522;
+$yellow: #fbb848;
+$green: #43b581;
+// $turquoise: #1abc9c;
+$blue: #00b0f4;
+// $purple: #8e44ad;
+$red: #f04747;
+$yellow-inverse: #fff;
+$white-ter: #ecf0f1;
+
+$primary: $blue !default;
+$link: $blue;
+$success: $green;
+$info: $yellow;
+$warning: $orange;
+$danger: $red;
+
+$warning-inverse: #fff;
+
+$text: #fff;
+$background: $light;
+$family-primary: 'Sora', sans-serif;
+
+$radius: 6px;
+$control-border-width: 3px;
+
+$menu-item-hover-color: #fff;
+$menu-item-radius: $radius;
+
+$title-font-weight: 800;
+
+$navbar-dropdown-border-top: 2px solid $dark;
+$navbar-dropdown-radius: $radius;
+$navbar-dropdown-boxed-radius: $radius;
+
+$input-background-color: $dark;
+$input-color: white;
+$input-border-color: darken($dark, 8%);

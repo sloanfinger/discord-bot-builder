@@ -1,0 +1,44 @@
+{
+	"clients": [{
+		"token": "abcedfghijkl12345",
+		"events": {
+			"channelCreate": [
+				{
+					"asynchronous": true,
+					"actions": [{
+						"target": "message",
+						"method": "reply",
+						"arguments": ["pong"]
+					}],
+					"conditions": [{
+						"target": "message",
+						"property": "content",
+						"operator": "===",
+						"comparison": "ping",
+						"caseSensitive": false
+					}],
+					"name": "Native Event"
+				}
+			],
+			"myCustomEvent": [
+				{
+					"asynchronous": false,
+					"actions": [{
+						"target": "message",
+						"method": "reply",
+						"arguments": ["pong"]
+					}],
+					"conditions": [{
+						"target": "message",
+						"property": "content",
+						"operator": "===",
+						"comparison": "ping",
+						"caseSensitive": false
+					}],
+					"name": "Custom Event"
+				}
+			]
+		}
+	}]
+}
+	

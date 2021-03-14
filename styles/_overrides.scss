@@ -1,0 +1,200 @@
+.is-shadowed {
+    box-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.66);
+}
+
+.navbar.is-fixed-top + .hero.is-fullheight-with-navbar {
+    padding-top: 3.5rem;
+}
+
+a {
+    transition: all 200ms;
+}
+
+.button {
+    transition: all 200ms ease;
+    border-width: $control-border-width;
+    border-radius: $radius;
+
+    &.is-active,
+    &.is-focused,
+    &:active,
+    &:focus {
+        box-shadow: 0 0 0 2px rgba($button-focus-border-color, 0.5);
+    }
+
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+
+        &.is-#{$name} {
+            border-color: darken($color, 8%);
+        
+            &.is-active,
+            &.is-focused,
+            &:active,
+            &:focus {
+                border-color: darken($color, 48);
+                box-shadow: 0 0 0 2px rgba($color, 0.5);
+            }
+        }
+    }
+}
+
+.navbar {
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+    
+        &.is-#{$name} {
+            .navbar-dropdown {
+                background-color: $color;
+                .navbar-item {
+                    &:hover {
+                        color: $color-invert;
+                        background-color: darken($color, 4%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.navbar-burger {
+    
+    span {
+
+        width: 21px;
+        height: 2px;
+        border-radius: $radius;
+        left: calc(50% - 10.5px);
+        transition: top .25s, transform .25s;
+        
+        &:nth-child(1) {
+            top: calc(50% - 8px);
+        }
+
+        &:nth-child(2) {
+            top: calc(50% - 1px);
+        }
+
+        &:nth-child(3) {
+            top: calc(50% + 6px);
+        }
+        
+    }
+
+    &.is-active span {
+
+        top: calc(50% - 1px);
+
+        &:nth-child(1), &:nth-child(2) {
+            transform: rotate(45deg);
+        }
+
+        &:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+    }
+
+}
+
+.menu {
+
+    .menu-label {
+        color: white;
+    }
+
+    hr {
+        margin-top: 0.5em;
+        margin-bottom: 1.5em;
+        width: 100%;
+    }
+
+    .is-active + hr {
+        margin-top: 1.5em;
+    }
+
+    hr:first-child {
+        margin-top: 0;
+    }
+
+    hr:last-child {
+        margin-bottom: 0;
+    }
+
+}
+
+*:not(.has-no-shadow) {
+    text-shadow: 0px 0px 6px rgba(0, 0, 0, calc(2 / 3));
+}
+
+.has-no-shadow {
+    text-shadow: none !important;
+}
+
+.tag {
+    text-shadow: none !important;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+    * {
+        text-shadow: none !important;
+    }
+}
+
+.is-checkradio[type=checkbox] {
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        &.is-#{$name} + label {
+            
+            &::before {
+                border-width: 3px;
+                background-image: radial-gradient($color, $color);
+                background-repeat: no-repeat;
+                background-size: 0% 0%;
+                background-position: center center;
+                transition: background-size .25s, border-color .25s;
+            }
+
+            &:hover::before {
+                border-color: $color;
+            }
+
+            &::after {
+                border-width: 3px;
+                border-color: transparent;
+                transition: border-color .25s;
+            }
+
+        }
+        &.is-#{$name}:checked + label {   
+
+            &::before {
+                border-color: darken($color, 8%);
+                background-size: 100% 100%;
+            }
+
+            &:hover::before {
+                border-color: darken($color, 12%) !important;
+            }
+
+            &::after {
+                border-color: white !important;
+            }
+
+        }
+    }
+}
+
+.notification {
+    padding: 0.75rem calc(2rem / 3);
+    color: white !important;
+    cursor: grab;
+
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+
+        &.is-#{$name}:not(.is-active) {
+            border: 3px solid darken($color, 8%);
+        }
+    }
+}

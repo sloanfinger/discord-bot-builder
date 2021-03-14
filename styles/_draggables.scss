@@ -1,0 +1,84 @@
+.draggable {
+    @extend .notification;
+    padding: 0.75rem calc(2rem / 3);
+    color: white !important;
+    cursor: grab;
+
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+
+        &.is-#{$name}:not(.is-active) {
+            border: 3px solid darken($color, 8%);
+        }
+    }
+
+    &.is-active {
+        background-color: transparent !important;
+        color: rgba(255, 255, 255, calc(1 / 3)) !important;
+        text-shadow: none !important;
+        box-shadow: 2px 2px 6px $black inset, -2px -2px 6px $black inset;
+        border: 3px dashed $black;
+        // padding: calc(0.75rem - 3px) calc(2rem / 3);
+        z-index: 9999 !important;
+        display: block;
+
+        @each $name, $pair in $colors {
+            $color: nth($pair, 1);
+            $color-invert: nth($pair, 2);
+
+            &.is-#{$name} {
+                // border: 3px dashed $color !important;
+                border: 3px solid darken($dark, 8%);
+            }
+        }
+    }
+}
+
+.droppable-parent {
+    @extend .notification;
+
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+
+        &.is-#{$name} {
+            border: 3px solid darken($color, 8%);
+        }
+    }
+}
+
+.droppable {
+    @extend .notification;
+    
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    text-shadow: none !important;
+    // box-shadow: 1px 1px 6px rgba(0, 0, 0, calc(1 / 3)) inset, -1px -1px 6px rgba(0, 0, 0, calc(1 / 3)) inset;
+    border: 3px dashed $black;
+    padding: calc(0.75rem - 3px) calc(2rem / 3);
+    z-index: 9999 !important;
+    display: block;
+    transition: box-shadow .25s, border .25s, background-size .25s, color .25s;
+    cursor: default;
+    
+    // background-image: linear-gradient(0deg, darken($light, 8%), darken($light, 8%));
+    // background-size: 0% 100%;
+    // background-repeat: no-repeat;
+
+    @each $name, $pair in $colors {
+        $color: nth($pair, 1);
+        $color-invert: nth($pair, 2);
+
+        &.is-#{$name}.is-hovered {
+            border-color: $color;
+            color: white !important;
+        }
+
+    }
+
+    // &.is-hovered {
+    //     background-size: 100% 100%;
+    // }
+
+}
