@@ -1,8 +1,12 @@
 import { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Link, Logo, Menu } from '.';
+
+import framework from '~/interfaces/framework.json';
 
 export function Navbar () {
 
+    const router = useRouter();
     const [changesToSave, setChangesToSave] = useState(false);
     const [logoText, setLogoText] = useState('Discord Bot Builder');
     const logoTexts = ['Discord Bot Builder', 'Don\'t Botch Babies', 'Dubious Body Builders'];
@@ -32,7 +36,7 @@ export function Navbar () {
             });
         } else {
             requestAnimationFrame(() => {
-                burger.current.classList.add('is-active');
+                burger.current?.classList?.add?.('is-active');
                 menu.current.classList.add('is-active');
                 menu.current.style.transition = 'none';
                 menu.current.style.height = '';
@@ -77,36 +81,47 @@ export function Navbar () {
             <div className="navbar-menu">
                 <div className="navbar-end">
 
-                    {/* Sign Out Button */}
-                    <div className="navbar-item">
-                        <a className="button is-black">
-                            <strong>Export&nbsp;&nbsp;&nbsp;<i className="fas fa-rocket"></i></strong>
+                    {/* Bot Selector */}
+                    <div className="navbar-item has-dropdown is-hoverable">
+
+                        <a className="navbar-link has-text-white has-text-font-bold">
+                            {framework.clients.filter(client => client.key == router.asPath.split('/').filter(path => path.length > 0)[1])[0]?.name}
                         </a>
-                        &nbsp;&nbsp;
-                        <a className={`button ${changesToSave ? 'is-primary' : 'is-black'}`}>
-                            <strong onClick={setChangesToSave.bind(null, !changesToSave)}>Save&nbsp;&nbsp;&nbsp;<i className="fas fa-save"></i></strong>
-                        </a>
+
+                        <div className="navbar-dropdown is-right" style={{ borderTopWidth: '3px' }}>
+                            {framework.clients.map(client => (
+                                <Link href={`/bot/${client.key}`} className="navbar-item has-text-white has-text-weight-bold">
+                                    {client.name}
+                                </Link>
+                            ))}
+                            <hr className="navbar-divider" />
+                            <a className="navbar-item has-text-success has-text-weight-bold">
+                                New Bot&nbsp;&nbsp;<i className="fas fa-plus"></i>
+                            </a>
+                        </div>
+
                     </div>
 
                 </div>
             </div>
 
             {/* Navbar Menu (Mobile)*/}
-            <div className="navbar-menu has-background-dark is-hidden-desktop" ref={menu}>
-                <div className="navbar-end">
+            <div className="navbar-menu has-background-dark is-hidden-desktop" ref={menu} style={{ padding: 0 }}>
+                <div className="navbar-end">    
 
-                    {/* Menu */}
-                    <div>
-                        <Menu mobile={true} />
-                    </div>
+                    <a className="navbar-link has-text-white has-text-weight-bold">
+                        {framework.clients.filter(client => client.key == router.asPath.split('/').filter(path => path.length > 0)[1])[0]?.name}
+                    </a>
 
-                    {/* Sign Out Button */}
-                    <div className="navbar-item has-text-right" style={{ transform: 'translateX(-0.5rem)' }}>
-                        <a className="button">
-                            <strong>Export&nbsp;&nbsp;&nbsp;<i className="fas fa-rocket"></i></strong>
-                        </a>
-                        <a className={`button ${changesToSave ? 'is-info' : 'is-black'}`}>
-                            <strong>Save&nbsp;&nbsp;&nbsp;<i className="fas fa-save"></i></strong>
+                    <div className="navbar-dropdown is-right" style={{ borderTopWidth: '3px' }}>
+                        {framework.clients.map(client => (
+                            <Link href={`/bot/${client.key}`} className="navbar-item has-text-weight-bold">
+                                {client.name}
+                            </Link>
+                        ))}
+                        <hr className="navbar-divider" />
+                        <a className="navbar-item has-text-success has-text-weight-bold">
+                            New Bot&nbsp;&nbsp;<i className="fas fa-plus"></i>
                         </a>
                     </div>
 

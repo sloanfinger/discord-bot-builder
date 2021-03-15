@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Navbar, Main, Loading } from '../components';
+import { Loading } from '~/components';
 import { AppComponent, AppProps } from 'next/dist/next-server/lib/router/router';
 
-import '../styles/main.scss';
+import '~/styles/main.scss';
 
 export default function Website ({Component, pageProps}: {Component: AppComponent, pageProps: AppProps}) {
     return (
@@ -17,11 +17,8 @@ export default function Website ({Component, pageProps}: {Component: AppComponen
             </Head>
 
             <DndProvider backend={HTML5Backend}>
-                <Navbar />
-                <Main>
-                    <Loading />
-                    <Component {...pageProps} />
-			    </Main>
+                <Loading />
+                <Component {...pageProps} />
             </DndProvider>
         </>
     );

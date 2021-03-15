@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export function Section ({id, className, children}: {id: string | undefined, className: string | undefined, children: ReactNode}) {
     return (

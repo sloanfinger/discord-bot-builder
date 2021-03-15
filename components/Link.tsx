@@ -1,16 +1,17 @@
 import NextLink from 'next/link';
-import { ReactNode } from 'react';
+import { ReactNode, ReactNodeArray } from 'react';
 
 interface props {
     href: string,
-    className: string, 
-    children: ReactNode
+    children: ReactNode | ReactNodeArray,
+    className?: string, 
+    style?: any
 };
 
-export function Link ({href, className, children}: props) {
+export function Link ({children, className, href, style}: props) {
     return (
         <NextLink href={href}>
-            <a className={className}>
+            <a className={className} style={style}>
                 {children}
             </a>
         </NextLink>

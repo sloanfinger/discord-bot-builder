@@ -41,4 +41,4 @@ $navbar-dropdown-boxed-radius: $radius;
 
 $input-background-color: $dark;
 $input-color: white;
-$input-border-color: darken($dark, 8%);
+$input-border-color: darken($dark, 8%) !important;

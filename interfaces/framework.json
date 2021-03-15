@@ -1,5 +1,7 @@
 {
 	"clients": [{
+		"name": "My Custom Bot",
+		"key": "customBotId2",
 		"token": "abcedfghijkl12345",
 		"events": {
 			"channelCreate": [
@@ -17,7 +19,9 @@
 						"comparison": "ping",
 						"caseSensitive": false
 					}],
-					"name": "Native Event"
+					"name": "Native Event",
+					"key": "nativeEventId",
+					"event": "channelCreate"
 				}
 			],
 			"myCustomEvent": [
@@ -35,7 +39,9 @@
 						"comparison": "ping",
 						"caseSensitive": false
 					}],
-					"name": "Custom Event"
+					"name": "Custom Event",
+					"key": "customEventId",
+					"event": "myCustomEvent"
 				}
 			]
 		}

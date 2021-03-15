@@ -1,17 +1,15 @@
-import { Draggable } from './';
-import djs from '../interfaces/djs.json';
+import { ReactNode, ReactNodeArray } from 'react';
 
-export function Menu ({mobile}: { mobile?: boolean }) {
+export function Menu ({children, mobile, vcentered}: { children: ReactNode | ReactNodeArray, mobile?: boolean, vcentered?: boolean }) {
 	return (
-		<div className="menu" style={{ padding: '1.5rem 1rem', minHeight: (mobile ? 'unset' : '100vh'), margin: '0 auto' }}>
-			
-			<div className="field">
-				<div className="control">
+		<aside className="column is-one-quarter is-hidden-touch has-background-dark is-shadowed" style={{ zIndex: 1 }}>
+			<div className="menu" style={{ padding: '1.5rem 1rem', margin: '0 auto' }}>
+				<div className={`columns ${vcentered ? 'is-vcentered' : ''}`} style={{minHeight: (mobile ? 'unset' : 'calc(100vh - 5.75rem)')}}>
+					<div className="column">
+						{children}
+					</div>
 				</div>
-			</div>
-
-			{djs?.classes[1]?.events?.map((event) => <Draggable color="primary" id="action">Event: {event.name}</Draggable>)}
-			
-		</div>
+			</div>	
+		</aside>
 	);
 }
