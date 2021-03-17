@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Link, Logo, Menu } from '.';
 
-import framework from '~/interfaces/framework.json';
+import framework from '~/interfaces/defaultClientsState.json';
 
 export function Navbar () {
 

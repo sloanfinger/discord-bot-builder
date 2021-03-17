@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "parse-djs": "node utils/djsParser.js",
     "start": "next start",
     "type-check": "tsc"
   },

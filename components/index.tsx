@@ -12,3 +12,4 @@ export * from '~/components/Section';
 export * from '~/components/States';
 export * from '~/components/Title';
 export * from '~/components/Throw404';
+export * from '~/components/Wraparound';

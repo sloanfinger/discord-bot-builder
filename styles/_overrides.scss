@@ -206,3 +206,17 @@ hr {
 .navbar-divider {
     height: 3px;
 }
+
+@each $name, $pair in $colors {
+    $color: nth($pair, 1);
+    $color-invert: nth($pair, 2);
+
+    .has-text-#{$name} {
+        &.has-text-lighter {
+            color: lighten($color, 8%) !important;
+        }
+        &.has-text-darker {
+            color: darken($color, 16%) !important;
+        }
+    }
+}

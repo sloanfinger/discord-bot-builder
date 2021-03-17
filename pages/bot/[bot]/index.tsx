@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-import djs from '~/interfaces/djs';
+import djs from '~/interfaces/djs.json';
 import { Content, Link, Main, Menu, Title, Throw404, useClientState, useEventState } from '~/components';
 
 export default function IndexPage () {
@@ -17,7 +17,7 @@ export default function IndexPage () {
 	const [client] = useClientState(router.asPath.split('/').filter(path => path !== '')[1]);
 	if (!client) return Throw404();
 	
-	const djsEvents = djs.classes[1].events?.map((event: any) => event.name);
+	const djsEvents = Object.keys(djs.classes.Client.events);
 
 	return (
 		<>
@@ -70,28 +70,34 @@ export default function IndexPage () {
 						</div>
 					</fieldset>
 
-					{(Object.keys(client.events) as Array<keyof typeof client.events>)
-						.filter(event => (djsEvents?.indexOf(event) !== -1 ||  (eventsFilter && djsEvents.indexOf(event) === -1)) && (djsEvents?.indexOf(event) === -1 ||  (customEventsFilter && djsEvents?.indexOf(event) !== -1)))
-						.map(event => client.events[event]
-							.filter(callback => (callback.name.toLowerCase().replace(/[^\w]/g, '').search(searchBar.toLowerCase().replace(/[^\w]/g, '')) !== -1) && (callback.asynchronous || (syncFilter && !callback.asynchronous)) && (!callback.asynchronous || (asyncFilter && callback.asynchronous)))
-							.map((callback) => (
+					{client.events
+						.filter(event => 
+							(event.name.toLowerCase().replace(/[^\w]/g, '').search(searchBar.toLowerCase().replace(/[^\w]/g, '')) !== -1) && (
+								((djsEvents.indexOf(event.event) !== -1 ||  (eventsFilter && djsEvents.indexOf(event.event) === -1)) && 
+								(djsEvents.indexOf(event.event) === -1 ||  (customEventsFilter && djsEvents?.indexOf(event.event) !== -1))) && 
+								((event.asynchronous || (syncFilter && !event.asynchronous)) &&
+								(!event.asynchronous || (asyncFilter && event.asynchronous)))
+							)
+						)
+						.map(event => (
 
-								<Link href={`/bot/${client.key}/event/${callback.key}/`} className="notification is-primary" style={{display: 'block'}}>
-									{callback.asynchronous && 
-										<span className="tag is-white has-text-weight-bold has-text-primary" style={{marginRight: 'calc(2rem / 3)'}}>
-											<i className="fas fa-stream"></i>&nbsp;&nbsp;ASYNC
-										</span>
-									}
-									<span className="tag is-white has-text-weight-bold has-text-primary" style={{marginRight: 'calc(2rem / 3)', marginBottom: '0.75rem'}}>
-										{(djsEvents?.indexOf(event) === -1) ? <><i className="fas fa-bolt"></i>&nbsp;&nbsp;EVENT</> : <><i className="fas fa-pen-alt"></i>&nbsp;&nbsp;CUSTOM EVENT</>}
+							<Link href={`/bot/${client.key}/event/${event.key}/`} className="notification is-primary" style={{display: 'block'}}>
+								{event.asynchronous && 
+									<span className="tag is-white has-text-weight-bold has-text-primary" style={{marginRight: 'calc(2rem / 3)'}}>
+										<i className="fas fa-stream"></i>&nbsp;&nbsp;ASYNC
 									</span>
-									<span className="tag is-white has-text-weight-bold has-text-primary">
-										<i className="fas fa-rss"></i>&nbsp;&nbsp;{event}
-									</span>
-									<h4 className="title is-4">{callback.name}</h4>
-								</Link>
+								}
+								<span className="tag is-white has-text-weight-bold has-text-primary" style={{marginRight: 'calc(2rem / 3)', marginBottom: '0.75rem'}}>
+									{(djsEvents.indexOf(event.event) === -1) ? <><i className="fas fa-bolt"></i>&nbsp;&nbsp;EVENT</> : <><i className="fas fa-pen-alt"></i>&nbsp;&nbsp;CUSTOM EVENT</>}
+								</span>
+								<span className="tag is-white has-text-weight-bold has-text-primary">
+									<i className="fas fa-rss"></i>&nbsp;&nbsp;{event.event}
+								</span>
+								<h4 className="title is-4">{event.name}</h4>
+							</Link>
 
-					)))}
+						))
+					}
 
 				</Main>
 			
