@@ -10,6 +10,7 @@ export * from '~/components/Modal';
 export * from '~/components/Navbar';
 export * from '~/components/Section';
 export * from '~/components/States';
+export * from '~/components/Tabs';
 export * from '~/components/Title';
 export * from '~/components/Throw404';
 export * from '~/components/Wraparound';

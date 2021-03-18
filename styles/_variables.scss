@@ -42,3 +42,9 @@ $navbar-dropdown-boxed-radius: $radius;
 $input-background-color: $dark;
 $input-color: white;
 $input-border-color: darken($dark, 8%) !important;
+
+$tabs-boxed-link-active-background-color: $dark;
+$tabs-border-bottom-color: darken($dark, 8%);
+$tabs-border-bottom-width: 3px;
+$tabs-boxed-link-hover-background-color: rgba(0, 0, 0, 0.25);
+$tabs-link-hover-color: white;

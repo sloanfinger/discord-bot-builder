@@ -248,3 +248,23 @@ hr {
         color: white !important;
     }
 }
+
+.tabs.tabs.is-boxed a {
+    font-weight: bold;
+}
+
+.tabs.is-boxed .is-active a {
+
+    border-top: 3px solid darken($dark, 8%) !important;
+    border-left: 3px solid darken($dark, 8%) !important;
+    border-right: 3px solid darken($dark, 8%) !important;
+
+    &, * {
+        text-shadow: none !important;
+    }
+
+}
+
+.menu-list a {
+    text-decoration: none !important;
+}
