@@ -19,7 +19,7 @@ export function Wraparound({ children, color = 'primary' }: { children: [ReturnT
             <div className="column is-narrow" style={{ padding: '0 0 0 0.75rem' }}>
                 <div className={`notification is-${color}`} style={{ borderTop: 0, borderBottom: 0, borderRadius: 0, height: 'calc(100% + 8px)', marginTop: '-4px', zIndex: 9999 }}></div>
             </div>
-            <div className="column">
+            <div className="column" style={{ padding: '1.5rem 0.75rem 1.5rem 1.5rem' }}>
                 {children[1]}
             </div>
             <div className="column is-full" style={{ paddingTop: '0' }}>

@@ -1,43 +1,34 @@
 {
 	"clients": [{
+		"discriminator": "client",
 		"name": "My Custom Bot",
 		"key": "customBotId2",
 		"token": "abcedfghijkl12345",
 		"events":[{
 			"asynchronous": true,
 			"actions": [{
-				"target": "message",
-				"method": "reply",
-				"arguments": ["pong"]
-			}],
-			"conditions": [{
+				"actions": [{
+					"discriminator": "action",
+					"name": "My Action",
+					"target": "message",
+					"method": "reply",
+					"arguments": ["pong"],
+					"conditions": [],
+					"key": "actionId"
+				}],
+				"discriminator": "condition",
+				"name": "My Condition",
 				"target": "message",
 				"property": "content",
 				"operator": "===",
 				"comparison": "ping",
-				"caseSensitive": false
+				"caseSensitive": false,
+				"key": "conditionId"
 			}],
+			"discriminator": "event",
 			"name": "Native Event",
 			"key": "nativeEventId",
 			"event": "channelCreate"
-		}, 
-		{
-			"asynchronous": false,
-			"actions": [{
-				"target": "message",
-				"method": "reply",
-				"arguments": ["pong"]
-			}],
-			"conditions": [{
-				"target": "message",
-				"property": "content",
-				"operator": "===",
-				"comparison": "ping",
-				"caseSensitive": false
-			}],
-			"name": "Custom Event",
-			"key": "customEventId",
-			"event": "myCustomEvent"
 		}]
 	}]
 }

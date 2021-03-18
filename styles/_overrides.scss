@@ -32,10 +32,15 @@ a {
             &.is-focused,
             &:active,
             &:focus {
-                border-color: darken($color, 48);
+                border-color: darken($color, 8%);
                 box-shadow: 0 0 0 2px rgba($color, 0.5);
             }
+            
+            &.is-dashed {
+                border: 3px dashed darken($color, 8%) !important;
+            }
         }
+
     }
 }
 
@@ -218,5 +223,28 @@ hr {
         &.has-text-darker {
             color: darken($color, 16%) !important;
         }
+    }
+}
+
+[contenteditable=true] {
+
+    border: 3px solid transparent;
+    border-radius: $radius;
+    margin-left: -9px;
+    margin-top: -9px;
+    padding: 6px;
+    // transition: .25s;
+
+    &:focus {
+        outline: none;
+        border-color: darken($primary, 16%);
+        background-color: darken($primary, 8%);
+    }
+}
+
+.has-text-dimmed {
+    color: #656669 !important;
+    &.is-hoverable:hover {
+        color: white !important;
     }
 }
