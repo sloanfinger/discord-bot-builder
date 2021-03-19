@@ -189,20 +189,6 @@ a {
     }
 }
 
-.notification {
-    padding: 0.75rem calc(2rem / 3);
-    color: white !important;
-
-    @each $name, $pair in $colors {
-        $color: nth($pair, 1);
-        $color-invert: nth($pair, 2);
-
-        &.is-#{$name}:not(.is-active) {
-            border: 3px solid darken($color, 8%);
-        }
-    }
-}
-
 hr {
     height: 3px;
     background-color: $black;
@@ -221,7 +207,7 @@ hr {
             color: lighten($color, 8%) !important;
         }
         &.has-text-darker {
-            color: darken($color, 16%) !important;
+            color: rgba(0, 0, 0, 0.5) !important;
         }
     }
 }
@@ -267,4 +253,36 @@ hr {
 
 .menu-list a {
     text-decoration: none !important;
+}
+
+.collapse {
+    @extend .button;
+
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 100%;
+    transition: background-color .25s;
+
+    i {
+        color: rgba(0, 0, 0, 0.5) !important;
+        text-shadow: none !important;
+        transition: background-color .25s, text-shadow .25s, transform .25s;
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.125) !important;
+        color: white !important;
+        text-shadow: 0px 0px 6px $shadow !important;
+    
+        i {
+            color: white !important;
+            text-shadow: 0px 0px 6px $shadow !important;
+        }
+    }
+
+    &.is-active i {
+        transform: rotate(180deg);
+    }
+
 }

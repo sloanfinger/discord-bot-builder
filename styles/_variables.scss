@@ -9,7 +9,7 @@ $yellow: #fbb848;
 $green: #43b581;
 // $turquoise: #1abc9c;
 $blue: #00b0f4;
-// $purple: #8e44ad;
+$purple: #551f8b;
 $red: #f04747;
 $yellow-inverse: #fff;
 $white-ter: #ecf0f1;
@@ -21,13 +21,32 @@ $info: $yellow;
 $warning: $orange;
 $danger: $red;
 
+$primary-gradient: linear-gradient(135deg, $blue, $purple);
+$link-gradient: linear-gradient(135deg, $blue, darken($blue, 24%));
+$success-gradient: linear-gradient(135deg, $green, darken($green, 24%));
+$info-gradient: linear-gradient(135deg, $yellow, $orange);
+$warning-gradient: linear-gradient(135deg, $yellow, $orange);
+$danger-gradient: linear-gradient(135deg, $orange, $red);
+$dark-gradient: linear-gradient(135deg, $light, $dark);
+
+$gradients: (
+    "primary": $primary-gradient,
+    "link": $link-gradient,
+    "success": $success-gradient,
+    "info": $info-gradient,
+    "warning": $warning-gradient,
+    "danger": $danger-gradient,
+    "dark": $dark-gradient
+);
+
+$shadow: rgba(0, 0, 0, calc(2 / 3));
 $warning-inverse: #fff;
 
 $text: #fff;
 $background: $light;
 $family-primary: 'Sora', sans-serif;
 
-$radius: 6px;
+$radius: 8px;
 $control-border-width: 3px;
 
 $menu-item-hover-color: #fff;
