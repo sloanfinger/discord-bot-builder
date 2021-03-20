@@ -2,6 +2,10 @@
     box-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.66);
 }
 
+.is-shadowed-up {
+    box-shadow: 1.5px -1.5px 3px rgba(0, 0, 0, 0.66);
+}
+
 .navbar.is-fixed-top + .hero.is-fullheight-with-navbar {
     padding-top: 3.5rem;
 }

@@ -27,7 +27,6 @@ export class Wraparound extends Component {
             mouseOver: false
         }
         Wraparound.instances.push(this);
-        console.log(Wraparound.instances);
     }
 
     // Still too jittery :'(
@@ -44,33 +43,21 @@ export class Wraparound extends Component {
                     target.style.transition = transition;
                     requestAnimationFrame(() => {
                         target.style.height = '0px';
-                        target.style.paddingTop = '0px';
-                        target.style.paddingBottom = '0px';
                     });
                 });
             } else {
                 let transition = target.style.transition
                 target.style.transition = 'none';
                 requestAnimationFrame(() => {
-                    target.style.paddingTop = '';
-                    target.style.paddingBottom = '';
-                    // target.style.height = null;
+                    let height = target.scrollHeight;
+                    target.style.transition = transition;
                     requestAnimationFrame(() => {
-                        let height = target.scrollHeight;
-                        console.log(height);
-                        target.style.paddingTop = '0px';
-                        target.style.paddingBottom = '0px';
-                        target.style.transition = transition;
-                        requestAnimationFrame(() => {
-                            target.style.overflow = 'hidden';
-                            target.style.height = height + 'px';
-                            target.style.paddingTop = '';
-                            target.style.paddingBottom = '';
-                            setTimeout(function () {
-                                target.style.height = null;
-                                target.style.overflow = '';
-                            }, 250);
-                        });
+                        target.style.overflow = 'hidden';
+                        target.style.height = height + 'px';
+                        setTimeout(function () {
+                            target.style.height = null;
+                            target.style.overflow = '';
+                        }, 250);
                     });
                 });
             }
@@ -117,9 +104,12 @@ export class Wraparound extends Component {
                     </div>
                 </div>
 
-                <div className="wraparound-content is-black" onMouseOver={this.stopPropagation} style={{ cursor: 'default' }} ref={this.contentRef} >
-                    <div style={{ transform: this.state.mouseOver ? 'scale(calc(1 / 1.0125))' : 'scale(1)', transition: 'transform .25s' }}>
-                        {this.children[1]}
+
+                <div className="wraparound-content-wrapper" ref={this.contentRef}>
+                    <div className="wraparound-content is-black" onMouseOver={this.stopPropagation} style={{ cursor: 'default' }}>
+                        <div style={{ transform: this.state.mouseOver ? 'scale(calc(1 / 1.0125))' : 'scale(1)', transition: 'transform .25s' }}>
+                            {this.children[1]}
+                        </div>
                     </div>
                 </div>
 

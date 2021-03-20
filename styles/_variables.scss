@@ -24,10 +24,11 @@ $danger: $red;
 $primary-gradient: linear-gradient(135deg, $blue, $purple);
 $link-gradient: linear-gradient(135deg, $blue, darken($blue, 24%));
 $success-gradient: linear-gradient(135deg, $green, darken($green, 24%));
-$info-gradient: linear-gradient(135deg, $yellow, $orange);
-$warning-gradient: linear-gradient(135deg, $yellow, $orange);
+$info-gradient: linear-gradient(135deg, $yellow, $red);
+$warning-gradient: linear-gradient(135deg, $yellow, $red);
 $danger-gradient: linear-gradient(135deg, $orange, $red);
-$dark-gradient: linear-gradient(135deg, $light, $dark);
+$light-gradient: linear-gradient(135deg, $light, $dark);
+$dark-gradient: linear-gradient(135deg, $light, $black);
 
 $gradients: (
     "primary": $primary-gradient,
@@ -36,6 +37,7 @@ $gradients: (
     "info": $info-gradient,
     "warning": $warning-gradient,
     "danger": $danger-gradient,
+    "light": $light-gradient,
     "dark": $dark-gradient
 );
 

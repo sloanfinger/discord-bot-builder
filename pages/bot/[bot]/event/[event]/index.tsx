@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import ContentEditable from 'react-contenteditable';
-import { Content, Link, Main, Menu, Modal, Tab, Tabs, Throw404, Title, useEventState, Wraparound, WraparoundBody, WraparoundHeader } from '~/components';
+import { Content, Link, Main, Menu, Throw404, Title, useEventState, Wraparound, WraparoundBody, WraparoundHeader } from '~/components';
 import { action as actionInterface, condition as conditionInterface, event as eventInterface, ExpandableObject } from '~/interfaces';
 import djs from '~/interfaces/djs.json';
 
@@ -9,14 +9,13 @@ export default function IndexPage() {
 
 	const router = useRouter();
 
-	const [globalModalState, setGlobalModalState] = useState(false);
-	const [globalModalPageState, setGlobalModalPageState] = useState('action');
 	const [targetSelectionState, setTargetSelectionState] = useState('channel');
 	const [event, setEventState] = useEventState(router.asPath.split('/').filter(path => path !== '')[1], router.asPath.split('/').filter(path => path !== '')[3]);
 	if (!event) return Throw404();
 
-	let djsEvent = event.event in djs.classes.Client.events ? djs.classes.Client.events[event.event as keyof typeof djs.classes.Client.events] : { customEvent: true };
+	console.log(router.asPath);
 
+	let djsEvent = event.event in djs.classes.Client.events ? djs.classes.Client.events[event.event as keyof typeof djs.classes.Client.events] : { customEvent: true };
 	return (
 		<>
 			<Title>Home</Title>
@@ -24,6 +23,7 @@ export default function IndexPage() {
 			<Content>
 				<Main>
 					<Wraparound color="primary">
+
 						<WraparoundHeader>
 							<ContentEditable
 								className="title is-3"
@@ -47,6 +47,7 @@ export default function IndexPage() {
 								}
 							</h5>
 						</WraparoundHeader>
+
 						<WraparoundBody>
 
 							{(() => {
@@ -80,7 +81,7 @@ export default function IndexPage() {
 											</WraparoundHeader>
 											<WraparoundBody>
 												{action.actions.map(action => renderAction(action))}
-												<Link href={router.asPath} className="notification is-dark has-text-centered" style={{ display: 'block' }}>
+												<Link href={router.asPath} className="notification is-light has-text-centered" style={{ display: 'block' }}>
 													<b><i className="fas fa-plus"></i>&nbsp;&nbsp;Add action or condition</b>
 												</Link>
 											</WraparoundBody>
@@ -91,7 +92,7 @@ export default function IndexPage() {
 								return event.actions.map((action) => renderAction(action));
 							})()}
 
-							<Link href={router.asPath} className="notification is-dark has-text-centered" style={{ display: 'block' }}>
+							<Link className="notification is-light has-text-centered" href={`${router.asPath}/new`} style={{ display: 'block' }}>
 								<b><i className="fas fa-plus"></i>&nbsp;&nbsp;Add action or condition</b>
 							</Link>
 
@@ -102,22 +103,9 @@ export default function IndexPage() {
 				<Menu><></></Menu>
 			</Content>
 
-			<Modal state={[globalModalState, setGlobalModalState]}>
-				<Tabs seamless={true}>
-					<Tab active={globalModalPageState === 'action'} onClick={setGlobalModalPageState.bind(null, 'action')}>
-						<span className="icon">
-							<i className="fas fa-play-circle"></i>
-						</span>
-						<span>Action</span>
-					</Tab>
-					<Tab active={globalModalPageState === 'condition'} onClick={setGlobalModalPageState.bind(null, 'condition')}>
-						<span className="icon">
-							<i className="fas fa-code-branch fa-rotate-90"></i>
-						</span>
-						<span>Condition</span>
-					</Tab>
-				</Tabs>
-				<div className="notification is-dark" style={globalModalPageState === 'action' ? {borderTopLeftRadius: 0, padding: '1.25rem 1.75rem'} : {padding: '1.25rem 1.75rem'}}>
+{/* 
+			<Modal toggle={globalModal}>
+				<div className="notification is-dark" style={{ padding: '1.25rem 1.75rem' }}>
 					<h3 className="title is-4 has-text-dimmed">Click to Edit Name</h3>
 
 					<div className="field" style={{ marginBottom: '1.5rem' }}>
@@ -156,8 +144,10 @@ export default function IndexPage() {
 					<div className="has-text-right" style={{ width: '100%' }}>
 						<button className="button is-primary"><i className="fas fa-plus"></i><b>&nbsp;&nbsp;&nbsp;Add to Event</b></button>
 					</div>
+				<button onClick={() => { globalModal.close() }}>close!</button>
+
 				</div>
-			</Modal>
+			</Modal> */}
 
 		</>
 	)

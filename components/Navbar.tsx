@@ -4,7 +4,7 @@ import { Link, Logo, Menu } from '.';
 
 import framework from '~/interfaces/defaultClientsState.json';
 
-export function Navbar () {
+export function Navbar ({bottom}: { bottom?: boolean }) {
 
     const router = useRouter();
     const [changesToSave, setChangesToSave] = useState(false);
@@ -58,7 +58,7 @@ export function Navbar () {
     }
 
 	return (
-        <nav className="navbar is-black is-fixed-top is-shadowed" role="navigation" aria-label="main navigation">
+        <nav className={`navbar is-black is-fixed-top ${bottom ? 'is-shadowed-up' : 'is-shadowed'}`} role="navigation" aria-label="main navigation" style={{ top: bottom ? 'calc(100vh - 3.25rem)' : '', transition: 'top 1s' }}>
 
             {/* Navbar Brand */}
             <div className="navbar-brand">
@@ -88,7 +88,7 @@ export function Navbar () {
                             {framework.clients.filter(client => client.key == router.asPath.split('/').filter(path => path.length > 0)[1])[0]?.name}
                         </a>
 
-                        <div className="navbar-dropdown is-right" style={{ borderTopWidth: '3px' }}>
+                        <div className={`navbar-dropdown is-right ${bottom ? 'is-up' : ''}`} style={{ borderTopWidth: '3px' }}>
                             {framework.clients.map(client => (
                                 <Link href={`/bot/${client.key}`} className="navbar-item has-text-white has-text-weight-bold">
                                     {client.name}
