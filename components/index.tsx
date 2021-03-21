@@ -6,7 +6,6 @@ export * from '~/components/Logo';
 export * from '~/components/Loading';
 export * from '~/components/Main';
 export * from '~/components/Menu';
-export * from '~/components/Modal';
 export * from '~/components/Navbar';
 export * from '~/components/Section';
 export * from '~/components/States';

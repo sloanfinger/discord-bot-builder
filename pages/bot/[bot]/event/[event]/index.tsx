@@ -2,20 +2,25 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import ContentEditable from 'react-contenteditable';
 import { Content, Link, Main, Menu, Throw404, Title, useEventState, Wraparound, WraparoundBody, WraparoundHeader } from '~/components';
-import { action as actionInterface, condition as conditionInterface, event as eventInterface, ExpandableObject } from '~/interfaces';
+import { action as actionInterface, condition as conditionInterface, event as eventInterface, ExpandableObject, ValueOf } from '~/interfaces';
 import djs from '~/interfaces/djs.json';
 
 export default function IndexPage() {
 
 	const router = useRouter();
 
-	const [targetSelectionState, setTargetSelectionState] = useState('channel');
-	const [event, setEventState] = useEventState(router.asPath.split('/').filter(path => path !== '')[1], router.asPath.split('/').filter(path => path !== '')[3]);
+	const [event, setEventState] = useEventState(router.query.bot, router.query.event);
 	if (!event) return Throw404();
 
 	console.log(router.asPath);
 
-	let djsEvent = event.event in djs.classes.Client.events ? djs.classes.Client.events[event.event as keyof typeof djs.classes.Client.events] : { customEvent: true };
+	// Throw 404 instead of handling custom event
+	if (!(event.event in djs.classes.Client.events)) {
+		return Throw404();
+	}
+
+	let djsEvent = djs.classes.Client.events[event.event as keyof typeof djs.classes.Client.events] as ValueOf<typeof djs.classes.Client.events>;
+
 	return (
 		<>
 			<Title>Home</Title>
@@ -51,9 +56,9 @@ export default function IndexPage() {
 						<WraparoundBody>
 
 							{(() => {
-								const renderAction = (action: (actionInterface | conditionInterface)) => {
+								const renderAction = (action: (actionInterface | conditionInterface), link: string) => {
 									return action.discriminator === 'action' ? (
-										<div className="notification is-success">
+										<div className="notification is-hoverable is-success" onClick={() => { router.push(`${link}/action/${action.key}/edit`) }}>
 											<h3 className="title is-3">{action.name}</h3>
 											<h5 className="subtitle is-6 has-text-weight-bold" style={{ marginBottom: 0 }}>
 												<span className="has-text-success has-text-darker" style={{ textShadow: 'none' }}>Execute&nbsp;&nbsp;</span>
@@ -69,7 +74,7 @@ export default function IndexPage() {
 											</h5>
 										</div>
 									) : (
-										<Wraparound color="info">
+										<Wraparound color="info" onClick={() => { router.push(`${link}/action/${action.key}/edit`) }}>
 											<WraparoundHeader>
 												<h3 className="title is-3">{action.name}</h3>
 												<h5 className="subtitle is-6 has-text-weight-bold" style={{ marginBottom: 0 }}>
@@ -80,8 +85,8 @@ export default function IndexPage() {
 												</h5>
 											</WraparoundHeader>
 											<WraparoundBody>
-												{action.actions.map(action => renderAction(action))}
-												<Link href={router.asPath} className="notification is-light has-text-centered" style={{ display: 'block' }}>
+												{action.actions.map(subAction => renderAction(subAction, `${link}/action/${action.key}`))}
+												<Link href={`${link}/action/${action.key}/create`} className="notification is-light has-text-centered" style={{ display: 'block' }}>
 													<b><i className="fas fa-plus"></i>&nbsp;&nbsp;Add action or condition</b>
 												</Link>
 											</WraparoundBody>
@@ -89,10 +94,10 @@ export default function IndexPage() {
 									)
 								};
 
-								return event.actions.map((action) => renderAction(action));
+								return event.actions.map((action) => renderAction(action as actionInterface | conditionInterface, router.asPath));
 							})()}
 
-							<Link className="notification is-light has-text-centered" href={`${router.asPath}/new`} style={{ display: 'block' }}>
+							<Link className="notification is-light has-text-centered" href={`${router.asPath}/create`} style={{ display: 'block' }}>
 								<b><i className="fas fa-plus"></i>&nbsp;&nbsp;Add action or condition</b>
 							</Link>
 
@@ -102,53 +107,6 @@ export default function IndexPage() {
 				</Main>
 				<Menu><></></Menu>
 			</Content>
-
-{/* 
-			<Modal toggle={globalModal}>
-				<div className="notification is-dark" style={{ padding: '1.25rem 1.75rem' }}>
-					<h3 className="title is-4 has-text-dimmed">Click to Edit Name</h3>
-
-					<div className="field" style={{ marginBottom: '1.5rem' }}>
-						<div className="control is-expanded">
-							<label className="label has-text-white">Target:</label>
-							<div className="select is-fullwidth">
-								<select onChange={(e) => setTargetSelectionState(e.target.value)}>
-									{djsEvent.params?.map(param => <option>{param.name}</option>)}
-								</select>
-							</div>
-						</div>
-					</div>
-
-					<div className="field" style={{ marginBottom: '1.5rem' }}>
-						<div className="control is-expanded">
-							<label className="label has-text-white">Action:</label>
-							<div className="select is-fullwidth">
-								<select>
-									{djs.classes[djsEvent.params.filter(param => param.name === targetSelectionState)[0].type[0][0]].methods.filter(method => !method.returns || method.returns[0]?.[0] === 'void' || method.returns[0]?.[0]?.[0] === 'Promise').map(method => <option>{method.name}</option>)}
-								</select>
-							</div>
-						</div>
-					</div>
-
-					<div className="field" style={{ marginBottom: '1.5rem' }}>
-						<div className="control is-expanded">
-							<label className="label has-text-white">Action:</label>
-							<div className="select is-fullwidth">
-								<select disabled={true}>
-									<option>Nothing to Select!</option>
-								</select>
-							</div>
-						</div>
-					</div>
-
-					<div className="has-text-right" style={{ width: '100%' }}>
-						<button className="button is-primary"><i className="fas fa-plus"></i><b>&nbsp;&nbsp;&nbsp;Add to Event</b></button>
-					</div>
-				<button onClick={() => { globalModal.close() }}>close!</button>
-
-				</div>
-			</Modal> */}
-
 		</>
 	)
 }

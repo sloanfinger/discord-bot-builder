@@ -1,0 +1,22 @@
+.spacer {
+    
+    display: block;
+    height: 0px;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 0.75rem;
+    width: 100%;
+
+    &.is-small {
+        padding-bottom: 0.5rem;
+    }
+
+    &.is-medium {
+        padding-bottom: 1.5rem;
+    }
+
+    &.is-large {
+        padding-bottom: 2.25rem;
+    }
+
+}

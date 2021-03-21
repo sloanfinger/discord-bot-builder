@@ -10,16 +10,14 @@
             text-decoration: none !important;
             transition: box-shadow .25s, transform .25s;
 
-            &[href]:hover {
+            &[href]:hover, &.is-hoverable:hover {
                 box-shadow: 0px 0px 9px $shadow;
+                cursor: pointer;
                 transform: scale(1.0125);
             }
 
         }
-
-        // &.is-#{$name}:not(.is-active) {
-        //     border: 3px solid darken($color, 8%);
-        // }
+        
     }
 
 }

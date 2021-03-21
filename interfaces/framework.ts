@@ -9,6 +9,7 @@ export interface ExpandableObject<T> {
 export interface action {
     arguments: string[],
     discriminator: 'action',
+    key: string,
     method: string,
     name: string,
     target: string
@@ -44,3 +45,5 @@ export interface client {
     name: string,
     token?: string
 }
+
+export type ValueOf<T> = T[keyof T];

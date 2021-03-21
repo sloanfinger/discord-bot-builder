@@ -30,7 +30,8 @@ export class Wraparound extends Component {
     }
 
     // Still too jittery :'(
-    private handleCollapseClick = () => {
+    private handleCollapseClick = (e: MouseEvent) => {
+        e.stopPropagation();
         let target = this.contentRef.current;
         if (target) {
             if (this.state.active) {
@@ -90,8 +91,9 @@ export class Wraparound extends Component {
     }
 
     render () {
+        
         return (
-            <div className={`wraparound is-${this.color}`} onMouseOver={this.handleMouseOver} onMouseLeave={this.handleMouseLeave} style={{ cursor: 'pointer', paddingBottom: this.state.active ? '' : '0.75rem', transform: this.state.mouseOver ? 'scale(1.0125)' : 'scale(1)', transition: 'transform .25s' }}>
+            <div className={`wraparound is-${this.color}`} onClick={this.props.onClick} onMouseOver={this.handleMouseOver} onMouseLeave={this.handleMouseLeave} style={{ cursor: 'pointer', paddingBottom: this.state.active ? '' : '0.75rem', transform: this.state.mouseOver ? 'scale(1.0125)' : 'scale(1)', transition: 'transform .25s' }}>
 
                 <div className="columns is-mobile" style={{ marginBottom: '0', paddingBottom: this.state.active ? '' : '0px', transition: 'padding .25s' }}>
                     <div className="column" style={{ paddingBottom: this.state.active ? '' : '0px', transition: 'padding .25s' }}>
@@ -105,7 +107,7 @@ export class Wraparound extends Component {
                 </div>
 
 
-                <div className="wraparound-content-wrapper" ref={this.contentRef}>
+                <div className="wraparound-content-wrapper" onClick={(e) => { e.stopPropagation() }} ref={this.contentRef}>
                     <div className="wraparound-content is-black" onMouseOver={this.stopPropagation} style={{ cursor: 'default' }}>
                         <div style={{ transform: this.state.mouseOver ? 'scale(calc(1 / 1.0125))' : 'scale(1)', transition: 'transform .25s' }}>
                             {this.children[1]}

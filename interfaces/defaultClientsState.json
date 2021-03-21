@@ -28,7 +28,7 @@
 			"discriminator": "event",
 			"name": "Native Event",
 			"key": "nativeEventId",
-			"event": "channelCreate"
+			"event": "messageUpdate"
 		}]
 	}]
 }

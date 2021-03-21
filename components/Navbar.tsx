@@ -1,56 +1,58 @@
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Link, Logo, Menu } from '.';
+import { Link, Logo } from '.';
 
 import framework from '~/interfaces/defaultClientsState.json';
 
-export function Navbar ({bottom}: { bottom?: boolean }) {
+export function Navbar () {
 
     const router = useRouter();
-    const [changesToSave, setChangesToSave] = useState(false);
     const [logoText, setLogoText] = useState('Discord Bot Builder');
     const logoTexts = ['Discord Bot Builder', 'Don\'t Botch Babies', 'Dubious Body Builders'];
 
-    const burger = useRef(null);
-    const menu = useRef(null);
+    const burgerRef = useRef(null);
+    const menuRef = useRef(null);
 
     const navbarToggle = function () {
-        if (burger.current.classList.contains('is-active')) {
+        let burger = burgerRef.current as unknown as HTMLAnchorElement;
+        let menu = menuRef.current as unknown as HTMLDivElement;
+
+        if (burger.classList.contains('is-active')) {
             requestAnimationFrame(() => {
-                menu.current.style.transition = 'none';
-                menu.current.style.height = '';
-                let height = menu.current.clientHeight;
+                menu.style.transition = 'none';
+                menu.style.height = '';
+                let height = menu.clientHeight;
                 requestAnimationFrame(() => {
-                    menu.current.style.height = height + 'px';
+                    menu.style.height = height + 'px';
                     requestAnimationFrame(() => {
-                        burger.current.classList.remove('is-active');
-                        menu.current.style.transition = 'height .2s';
-                        menu.current.style.height = '0px';
-                        menu.current.style.overflowY = 'hidden';
-                        document.body.parentElement.style.overflowY = 'auto';
+                        burger.classList.remove('is-active');
+                        menu.style.transition = 'height .2s';
+                        menu.style.height = '0px';
+                        menu.style.overflowY = 'hidden';
+                        (document.body.parentElement as HTMLHtmlElement).style.overflowY = 'auto';
                         setTimeout(() => {
-                            menu.current.classList.remove('is-active');
+                            menu.classList.remove('is-active');
                         }, 200);
                     });
                 });
             });
         } else {
             requestAnimationFrame(() => {
-                burger.current?.classList?.add?.('is-active');
-                menu.current.classList.add('is-active');
-                menu.current.style.transition = 'none';
-                menu.current.style.height = '';
-                let height = menu.current.clientHeight;
-                menu.current.style.height = '0px';
+                burger?.classList?.add?.('is-active');
+                menu.classList.add('is-active');
+                menu.style.transition = 'none';
+                menu.style.height = '';
+                let height = menu.clientHeight;
+                menu.style.height = '0px';
                 requestAnimationFrame(() => {
-                    menu.current.style.transition = 'height .2s';
-                    menu.current.style.height = height + 'px';
-                    menu.current.style.overflowY = 'hidden';
+                    menu.style.transition = 'height .2s';
+                    menu.style.height = height + 'px';
+                    menu.style.overflowY = 'hidden';
                     setTimeout(() => {
-                        menu.current.style.overflowY = 'auto';
-                        document.body.parentElement.style.overflowY = 'hidden';
-                        menu.current.style.transition = 'none';
-                        menu.current.style.height = '';
+                        menu.style.overflowY = 'auto';
+                        (document.body.parentElement as HTMLHtmlElement).style.overflowY = 'hidden';
+                        menu.style.transition = 'none';
+                        menu.style.height = '';
                     }, 200);
                 });
             });
@@ -58,7 +60,7 @@ export function Navbar ({bottom}: { bottom?: boolean }) {
     }
 
 	return (
-        <nav className={`navbar is-black is-fixed-top ${bottom ? 'is-shadowed-up' : 'is-shadowed'}`} role="navigation" aria-label="main navigation" style={{ top: bottom ? 'calc(100vh - 3.25rem)' : '', transition: 'top 1s' }}>
+        <nav className="navbar is-black is-fixed-top is-shadowed" role="navigation" aria-label="main navigation">
 
             {/* Navbar Brand */}
             <div className="navbar-brand">
@@ -69,7 +71,7 @@ export function Navbar ({bottom}: { bottom?: boolean }) {
                 </a>
 
                 {/* Burger Icon (Mobile Only) */}
-                <a role="button" className="navbar-burger" aria-label="menu" ref={burger} onClick={navbarToggle} aria-expanded="false">
+                <a role="button" className="navbar-burger" aria-label="menuRef" ref={burgerRef} onClick={navbarToggle} aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -88,7 +90,7 @@ export function Navbar ({bottom}: { bottom?: boolean }) {
                             {framework.clients.filter(client => client.key == router.asPath.split('/').filter(path => path.length > 0)[1])[0]?.name}
                         </a>
 
-                        <div className={`navbar-dropdown is-right ${bottom ? 'is-up' : ''}`} style={{ borderTopWidth: '3px' }}>
+                        <div className="navbar-dropdown is-right" style={{ borderTopWidth: '3px' }}>
                             {framework.clients.map(client => (
                                 <Link href={`/bot/${client.key}`} className="navbar-item has-text-white has-text-weight-bold">
                                     {client.name}
@@ -106,7 +108,7 @@ export function Navbar ({bottom}: { bottom?: boolean }) {
             </div>
 
             {/* Navbar Menu (Mobile)*/}
-            <div className="navbar-menu has-background-dark is-hidden-desktop" ref={menu} style={{ padding: 0 }}>
+            <div className="navbar-menu has-background-dark is-hidden-desktop" ref={menuRef} style={{ padding: 0 }}>
                 <div className="navbar-end">    
 
                     <a className="navbar-link has-text-white has-text-weight-bold">
