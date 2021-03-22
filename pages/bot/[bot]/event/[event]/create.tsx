@@ -73,7 +73,7 @@ export default function IndexPage() {
                                     <i className="fas fa-signature"></i>
                                 </span>
                                 <span className="icon is-small is-right">
-                                    {/* <i className="fas fa-circle-notch"></i> */}
+                                    <i className="loader"></i>
                                 </span>
                             </div>
                             <p className="help is-danger">
@@ -121,12 +121,18 @@ export default function IndexPage() {
                                     {actionMethod.params.map((param, index) => (
                                         <>
                                             <div className="field">
-                                                <div className="control">
-                                                    <label className="label has-text-white">
-                                                        <strong style={{ fontSize: '1rem' }}>{param.name}</strong><br />
-                                                        <span style={{ fontSize: '0.75rem', fontWeight: 'normal' }}>{param.description}</span>
-                                                    </label>
-                                                    <input className="input is-medium" />
+                                                <label className="label has-text-white">
+                                                    <strong style={{ fontSize: '1rem' }}>{param.name}</strong><br />
+                                                    <span style={{ fontSize: '0.75rem', fontWeight: 'normal' }}>{param.description}</span>
+                                                </label>
+                                                <div className="control has-icons-left has-icons-right">
+                                                    <input className="input is-medium is-black is-normal" />
+                                                    <span className="icon is-left">
+                                                        <i className="fas fa-cog"></i>
+                                                    </span>
+                                                    <span className="icon is-right">
+                                                        <i className="loader"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                             {((index + 1) !== actionMethod.params.length) && <div className="spacer is-small"></div>}
@@ -139,7 +145,7 @@ export default function IndexPage() {
                         <div className="spacer is-medium"></div>
 
                         <div className="buttons is-right">
-                            <button className="button is-medium is-info is-outlined has-text-white" onClick={() => { router.back() }}>
+                            <button className="button is-medium is-light" onClick={() => { router.back() }}>
                                 <span className="icon"><i className="fas fa-ban"></i></span>
                                 <strong>Cancel</strong>
                             </button>

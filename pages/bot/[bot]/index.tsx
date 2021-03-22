@@ -115,22 +115,16 @@ export default function IndexPage () {
 
 						<hr style={{ margin: '0 0 1.5rem 0' }} />
 
-						<div className="field">
-							<div className="control">
-								<button className="button is-primary is-fullwidth">New Event&nbsp;&nbsp;&nbsp;<i className="fas fa-plus"></i></button>
-							</div>
+						<div className="notification is-primary is-hoverable">
+							New Event&nbsp;&nbsp;&nbsp;<i className="fas fa-plus"></i>
 						</div>
 
-						<div className="field">
-							<div className="control">
-								<button className="button is-dark is-fullwidth">Create Custom Event&nbsp;&nbsp;&nbsp;<i className="fas fa-pen-alt"></i></button>
-							</div>
+						<div className="notification is-danger is-hoverable">
+							Create Custom Event&nbsp;&nbsp;&nbsp;<i className="fas fa-pen-alt"></i>
 						</div>
 
-						<div className="field">
-							<div className="control">
-								<button className="button is-dark is-fullwidth">Export Bot&nbsp;&nbsp;&nbsp;<i className="fas fa-rocket"></i></button>
-							</div>
+						<div className="notification is-warning is-hoverable">
+							Export Bot&nbsp;&nbsp;&nbsp;<i className="fas fa-rocket"></i>
 						</div>
 
 					</div>

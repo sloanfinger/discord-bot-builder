@@ -45,7 +45,7 @@ export function Loading () {
                     top: 0;
                     height: 2.5px;
                     transition: width 0.5s, opacity: 0.125s;
-                    background: #00272B;
+                    background: white;
                     z-index: 999;
                 }     
 

@@ -13,7 +13,7 @@
             &[href]:hover, &.is-hoverable:hover {
                 box-shadow: 0px 0px 9px $shadow;
                 cursor: pointer;
-                transform: scale(1.0125);
+                transform: $scale-transform;
             }
 
         }

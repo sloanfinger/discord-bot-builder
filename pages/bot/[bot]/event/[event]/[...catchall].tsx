@@ -34,6 +34,7 @@ export default function IndexPage() {
 		return Throw404();
 	}
 
+    // Death is inevitable
     const addActionToEvent = () => {
         setEventState('actions', event.actions.concat([{
             arguments: [],

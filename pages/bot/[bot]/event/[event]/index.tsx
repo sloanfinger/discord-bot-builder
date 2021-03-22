@@ -45,7 +45,9 @@ export default function IndexPage() {
 								{('params' in djsEvent && djsEvent.params.length)
 									? djsEvent.params.map((param: typeof djsEvent.params[0], index: number) => index + 1 !== djsEvent.params.length
 										? index + 2 === djsEvent.params.length
-											? <>{param.name}<span className="has-text-primary has-text-darker" style={{ textShadow: 'none' }}> ,&nbsp;&nbsp;and&nbsp;&nbsp;</span></>
+											? djsEvent.params.length === 2
+												? <>{param.name}<span className="has-text-primary has-text-darker" style={{ textShadow: 'none' }}> &nbsp;&nbsp;and&nbsp;&nbsp;</span></>
+												: <>{param.name}<span className="has-text-primary has-text-darker" style={{ textShadow: 'none' }}> ,&nbsp;&nbsp;and&nbsp;&nbsp;</span></>
 											: <>{param.name}<span className="has-text-primary has-text-darker" style={{ textShadow: 'none' }}> ,&nbsp;&nbsp;</span></>
 										: param.name)
 									: <span className="has-text-primary has-text-darker" style={{ textShadow: 'none' }}>nothing</span>

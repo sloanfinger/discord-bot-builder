@@ -233,7 +233,7 @@ hr {
 }
 
 .has-text-dimmed {
-    color: #656669 !important;
+    color: rgba(255, 255, 255, calc(1 / 3)) !important;
     &.is-hoverable:hover {
         color: white !important;
     }
@@ -301,5 +301,98 @@ hr {
 
     &:last-child {
         margin-right: 0 !important;
+    }
+}
+
+.input[type=text], .input:not([type]) {
+
+    background-color: $dark;
+    background-image: $light-gradient;
+    background-repeat: no-repeat;
+    border: none;
+    box-shadow: 0px 0px 6px $shadow;
+    color: white;
+    transition: box-shadow .25s;
+
+    &.is-normal {
+        
+        background-color: $dark;
+        background-image: none;
+        box-shadow: none !important;
+        border: 3px solid $black;
+
+        @each $name, $pair in $colors {
+            &.is-#{$name} {
+                border: 3px solid nth($pair, 1);
+            }   
+        }
+
+    }
+
+    &::placeholder {
+        color: rgba(255, 255, 255, calc(1 / 3));
+    }
+
+    &:focus, &:active {
+        box-shadow: 0px 0px 9px $shadow;
+    }
+
+
+
+}
+
+.button {
+    
+    background-color: transparent !important;
+    background-image: none;
+    border: none;
+    color: white;
+    padding: calc(0.5em - 6px) calc(1em - 6px);
+    transition: all .25s;
+
+    @each $name, $gradient in $gradients {
+        &.is-#{$name}::before {
+            content: '';
+            background-image: $gradient;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: 100%;
+            border-radius: $radius;
+            height: calc(100% + 6px);
+            position: absolute;
+            transition: background-size .25s;
+            width: calc(100% + 6px);
+            z-index: -1;
+        }
+        // &.is-#{$name}:hover::before {
+        //     background-size: 150%;
+        // }
+    }
+
+    &.is-outlined {
+        background-color: $black !important;
+        transition: background-color .25s;
+        &:hover {
+            background-color: transparent !important;
+        }
+    }
+
+    .icon:first-child {
+        margin-left: -0.25rem !important;
+    }
+
+    &:hover {
+        transform: scale(($scale - 1) * 2 + 1);
+    }
+
+}
+
+.loader {
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    transition: border-color .25s;
+    &.is-active {
+        border-left-color: rgba(255, 255, 255, calc(1 / 3));
+        border-bottom-color: rgba(255, 255, 255, calc(1 / 3));
     }
 }
