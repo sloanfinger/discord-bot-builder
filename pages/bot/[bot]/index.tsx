@@ -35,7 +35,7 @@ export default function IndexPage () {
 						</div>
 					</div>
 
-					<fieldset className="notification columns is-dark has-text-centered" style={{ margin: '0 0 1.5rem 0' }}>
+					<fieldset className="notification columns is-light has-text-centered" style={{ margin: '0 0 1.5rem 0' }}>
 						<div className="column">
 							<div className="field">
 								<div className="control">
