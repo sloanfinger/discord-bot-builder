@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/next-auth": "^3.7.1",
+    "@types/uuid": "^8.3.0",
     "bulma-checkradio": "^1.1.1",
     "bulma-switch": "^2.0.0",
     "next": "latest",

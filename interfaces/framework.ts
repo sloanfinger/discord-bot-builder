@@ -7,6 +7,7 @@ export interface ExpandableObject<T> {
 }
 
 export interface action {
+    actions: (action | condition)[],
     arguments: string[],
     discriminator: 'action',
     key: string,

@@ -5,7 +5,7 @@ import { Content, Main, Menu, Throw404, Title, useEventState } from '~/component
 import { ValueOf } from '~/interfaces';
 import djs from '~/interfaces/djs.json';
 
-export default function IndexPage() {
+export default function CreateAction ({context}: { context: any }) {
 
 	const router = useRouter();
 
@@ -22,10 +22,12 @@ export default function IndexPage() {
 	// Throw 404 instead of handling custom event
 	if (!(event.event in djs.classes.Client.events)) {
 		return Throw404();
-	}
+    }
+    
+    context = context ?? event.actions;
 
     const addActionToEvent = () => {
-        setEventState('actions', event.actions.concat([{
+        setEventState('actions', context.concat([{
             arguments: [],
             discriminator: 'action',
             key: uuid(),
@@ -128,7 +130,7 @@ export default function IndexPage() {
                                                 <div className="control has-icons-left has-icons-right">
                                                     <input className="input is-medium is-black is-normal" />
                                                     <span className="icon is-left">
-                                                        <i className="fas fa-cog"></i>
+                                                        <i className="fas fa-i-cursor"></i>
                                                     </span>
                                                     <span className="icon is-right">
                                                         <i className="loader"></i>

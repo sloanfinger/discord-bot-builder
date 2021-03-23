@@ -24,6 +24,8 @@ export const useClientState = (clientKey: string) => {
 export const useEventState = (clientKey: string, eventKey: string) => {
     const [client, setClientState] = useClientState(clientKey);
 
+    console.log(client);
+
     const event = client?.events.filter(event =>  event.key === eventKey)[0];
     type eventType = typeof event;
 

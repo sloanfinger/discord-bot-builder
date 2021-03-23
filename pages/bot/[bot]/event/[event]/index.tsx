@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import ContentEditable from 'react-contenteditable';
 import { Content, Link, Main, Menu, Throw404, Title, useEventState, Wraparound, WraparoundBody, WraparoundHeader } from '~/components';
@@ -19,6 +18,7 @@ export default function IndexPage() {
 		return Throw404();
 	}
 
+	console.log(event);
 	let djsEvent = djs.classes.Client.events[event.event as keyof typeof djs.classes.Client.events] as ValueOf<typeof djs.classes.Client.events>;
 
 	return (
@@ -87,7 +87,7 @@ export default function IndexPage() {
 												</h5>
 											</WraparoundHeader>
 											<WraparoundBody>
-												{action.actions.map(subAction => renderAction(subAction, `${link}/action/${action.key}`))}
+												{action.actions?.map(subAction => renderAction(subAction, `${link}/action/${action.key}`))}
 												<Link href={`${link}/action/${action.key}/create`} className="notification is-light has-text-centered" style={{ display: 'block' }}>
 													<b><i className="fas fa-plus"></i>&nbsp;&nbsp;Add action or condition</b>
 												</Link>
